@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Chai aur Javascript</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+ 
+//  setInterval(function(){
+//     console.log('anand');
+//  },1000)
+
+
+const sayDate= function(str){
+    console.log(str,Date.now());
+ }
+
+ const intervalId= setInterval(sayDate,1000, "anand")
+ clearInterval(intervalId)//clear interval method is used to clear the all previous values by setInterval() Methd.
+
+/**********************assignment********************** */
+ 
+let interval_Id;
+  document.querySelector('#start').addEventListener('click',
+  function(){
+      if(!interval_Id ){//where !interval_Id means  interval_Id == null
+    interval_Id= setInterval(function () {
+        console.log(Date.now());
+    },2000)
+}
+})
+  
+ document.querySelector('#stop').addEventListener('click',function(){
+clearInterval(interval_Id)
+console.log("stopped");
+  })
+
+</script>
+</html>

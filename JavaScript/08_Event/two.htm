@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Chai aur code</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    // setTimeout() is a method which is also call the API.
+
+  /***********************setTimeout() using regular method ************************/
+
+
+  setTimeout(function () {//setTimeout() method ka use karte hai ki itne time bad ye kam ker disiye.
+        console.log("anand raj bind");// after two second print: anand raj bind
+    }, 2000);
+
+
+    /***********************setTimeout() method using reference/handler/callback function ************************/
+
+    const sayAnand = function () {// itne time per ye kam ker disiye.
+        console.log("anand");
+    }
+
+    const changeText = function () {
+        document.querySelector('h1').innerHTML = 'best js series'
+    }
+    const changeMe= setTimeout(changeText, 5000);// after two second change the h1 text.
+
+    //  clearTimeout(changeMe);
+
+    document.querySelector('#stop').addEventListener('click', function(){
+        clearTimeout(changeMe);
+        console.log("stopped");
+    })
+
+</script>
+</html>

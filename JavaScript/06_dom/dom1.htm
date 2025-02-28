@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Part 1 </title>
+
+    <style>
+        .bg-black {
+            background-color: #212121;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body  class="bg-black">
+    <div>
+        <h1 id="title" class="heading">DOM learning on chai aur code <span style="display: none">I am span tag </span></h1>
+        <p> Lorem ipsum dolor sit amet. </p>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <input type="password" id="anad" name="aman">
+        <ul>
+            <li class="list-item">one</li>
+            <li class="list-item">two</li>
+            <li class="list-item">three</li>
+            <li class="list-item">four</li>
+        </ul>
+    </div>
+</body>
+</html>
+
+<!-- 
+***********************************querySelectorAll()*********************************************************************************
+document.querySelectorAll('li')
+note: document.querySelectorAll('li') command run karne per nodeList Output milta hai.while document.getElementsByClassName('list-item')command run karne per HTMLCollection Output milta hai
+
+NodeList(3) [li, li, li]0: li1: li2: lilength: 3[[Prototype]]: NodeList
+const tempLiList=document.querySelectorAll('li')
+undefined
+tempLiList.style.color='green'// not allowed
+VM617:1 Uncaught TypeError: Cannot set properties of undefined (setting 'color')at <anonymous>:1:23(anonymous) @ VM617:1
+    
+ 
+tempLiList[1].style.color='red' // allow
+'red'
+
+tempLiList.forEach(function(li){li.style.backgroundColor="green"})
+
+***************************************************getElementsByClassName('list-item')**********************************************
+
+const tempclassList=document.getElementsByClassName('list-item')
+
+tempclassList
+HTMLCollection(4) [li.list-item, li.list-item, li.list-item, li.list-item]0: li.list-item1: li.list-item2: li.list-item3: li.list-itemlength: 4[[Prototype]]: HTMLCollection
+
+Array.from(tempclassList)// convert HTMLCollection into Array
+(4) [li.list-item, li.list-item, li.list-item, li.list-item]
+
+const myConvertedArray=Array.from(tempclassList)
+
+myConvertedArray.forEach(function (li) { 
+    li.style.backgroundColor='red'
+}
+
+
+ -->
+

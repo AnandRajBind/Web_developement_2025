@@ -1,0 +1,27 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+ }
+main{
+    display: flex;
+}
+ div{
+    height: 200px;
+    width: 200px;
+}
+#box1{
+ 
+    background: blue;
+}
+#box2{
+ 
+    background: rgb(245, 23, 23);
+}
+#box3{
+ 
+    background: rgb(255, 196, 0);
+}

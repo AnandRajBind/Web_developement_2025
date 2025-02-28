@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>htnml Events</title>
+  </head>
+  <body style="background-color: #414141; color: aliceblue">
+    <h2>Amazing image</h2>
+    <div>
+      <ul id="images">
+        <li>
+          <img
+            width="200px"
+            id="photoshop"
+            src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt="photoshop"
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="japan"
+            src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="river"
+            src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="owl"
+            src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+            />
+            <!-- onclick="alert('clicked')"-->  
+ 
+
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="prayer"
+            src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <a style="color: aliceblue" href="https://google.com" id="google"
+            >Google</a
+          >
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+  //in Js  all Code/events run Sequentialy.
+// ****************************click using onclick() method ***************************************
+
+// document.getElementById('owl').onclick=function(){
+//   alert("Clicked on Owl");
+// }
+
+
+
+// ****************************click using addEventListener()method ***************************************
+
+// jQuery-on
+// attachEvent
+/* 
+****************** following events are read ***********************
+type, timestamp,defaultPrevented
+target, toElement, srcElement, currentTarget
+clientX,clientY, screenX, screenY
+altkey, ctrlkey, shiftkey, keyCode
+
+*/
+
+/*
+document.getElementById('owl').addEventListener('click',function(){
+  alert('again clicked')
+},false)*/
+
+
+// note:- addEventListener() is used to three parameter,third parameter is  false. bydefault false(optional).
+
+// ***************************** event object ***************************************
+
+/*
+document.getElementById('owl').addEventListener('click',function(e){
+console.log(e);
+},false)
+
+*/
+
+/**************************************Event propogation ***********************************/
+
+/* It has been two context event Bubbling and event capturing.
+ 1. in the event bubbling  propogation  inside se outside (bottom to up )per focus kiya jata hai. event Bubbling (mostly used) ko defaults propogation bolte hai jo ki false hota hai.
+ 2. in the event capturing propogation outside se inside (top to dowen)  per focus kiya jata hai. jo ki true hota hai.
+
+*/
+/* ***************************** event bubbling propogation example *****************************/
+ 
+/*
+ document.getElementById('images').addEventListener('click',function(e){
+console.log('clicked inside ul');
+},false)
+document.getElementById('owl').addEventListener('click',function(e){
+console.log('owl clicked ');
+e.stopPropagation()//event bubble hoker top per nhi ja paye isliye stopPropagation() method usekiya jata hai.
+},false)
+*/
+
+/*
+output:- 
+clicked inside owl
+clicked inside ul
+*/
+
+/* ***************************** event capturing propogation example *****************************/
+
+/*
+document.getElementById('images').addEventListener('click',function(e){
+console.log('clicked inside ul');
+// e.stopPropagation()
+ },true)
+document.getElementById('owl').addEventListener('click',function(e){
+  console.log('clicked inside owl');
+},true)
+*/
+
+
+/* output:- clicked inside ul
+          clicked inside owl
+*/
+
+
+// document.getElementById('google').addEventListener('click', function(e){
+//   e.preventDefault();/*The preventDefault() method is used to prevent the browser from executing the default action of the selected element. It can prevent the user from processing the request by clicking the link*/
+//   e.stopPropagation()
+//   console.log(e);
+// console.log('google clicked');
+// },false)
+
+//********************************* click on the image and remove the image.**************************
+
+document.querySelector('#images').addEventListener('click',function(e){
+// console.log(e.target);// target method targetkarta hai element ko 
+console.log(e.target.tagName);//tagName method is select the target element ka tagName.
+if(e.target.tagName === 'IMG')
+{
+  let removeIt= e.target.parentNode
+  removeIt.remove();
+}
+},false)
+
+
+</script>
+</html>
+
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Part 3 : How to Create New Element</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+
+</body>
+<script>
+
+    // ************************************Create new Element**********************************
+const div= document.createElement('div');//create div element 
+console.log(div);
+div.className="main";// set class 
+div.id=Math.round((Math.random() *10+1))// set id
+div.setAttribute('title' ,"generated title")//setAttribute value ko set karta hai n ki override.
+div.style.backgroundColor='green'
+div.style.padding='12px'
+div.innerText='Chai aur Code'// innerText value ko Override karta hai. aur text ko div ke ander insert kiya ja raha hai.********method1************
+
+
+const addText=document.createTextNode("Chai aur Code");
+ div.appendChild(addText);//text ko div ke ander insert kiya ja raha hai.********method2*********
+
+// div ko web ke body per append kiya ja raha hai.
+document.body.appendChild(div);
+
+</script>
+</html>

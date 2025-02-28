@@ -1,0 +1,61 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> DOM Part 2 </title>
+    
+</head>
+
+
+<body style="background-color: #212121; color: #fff;">
+    <div class="parent">
+        <div class="day">Monday </div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thursday</div>
+    </div>
+
+    
+</body>
+
+
+<script>
+
+ /**********************************Parent to child Traversal********************************************/
+
+    const parent=document.querySelector(".parent")// select parent 
+    
+    /*
+    console.log(parent);
+    console.log(parent.children);// output:- "children" is property which is show the all child of the parent.In  HTML COLLECTION form.
+    console.log(parent.children[1]);// output:- HTML COLLECTION ki first index ki value access.
+    console.log(parent.children[1].innerHTML);// output:- HTML COLLECTION ki first index ki only inner text selected.
+ 
+
+     for(let i=0; i<parent.children.length; i++){ // print all child ka inner Text only.
+        console.log(parent.children[i].innerHTML);
+    }
+ */
+
+    /*
+    parent.children[1].style.color='red'// change first children color
+    console.log(parent.firstElementChild);// select the first child
+    console.log(parent.lastElementChild);// select the last child
+    */
+
+/****************************************child to parent Traversal********************************************/
+
+const dayOne=document.querySelector('.day')// querySelector only first selector ko hi select karta hai.
+
+console.log(dayOne.innerHTML); // Tuesday
+console.log(dayOne.parentElement.innerHTML); // 
+console.log(dayOne.nextElementSibling.innerHTML);// selected child ka next sibling. (Tuesday).
+
+console.log("Nodes: ",parent.childNodes);// all parent nodes.one line break ko one node (text) consider karta hai.if multiple line break then consider only one node. not multiple node.
+
+
+</script>
+</html>

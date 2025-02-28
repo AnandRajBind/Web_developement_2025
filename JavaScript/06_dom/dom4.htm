@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> DOM: 4 Edit and Remove </title>
+</head>
+
+<body style="background-color: #221121; color: #fff;">
+
+    <ul class="language">
+        <li>JavaScript</li>
+
+    </ul>
+</body>
+
+
+<script>
+    //
+    function addLanguage(langName) {
+        const li = document.createElement("li");// li name se ake tag/element create ho raha hai.
+        li.innerHTML = `${langName}`
+        document.querySelector(".language").appendChild(li);// select and display list on the webpage
+    }
+    addLanguage("Python")
+    addLanguage("TypeScript")
+
+    // ************************************************optimize way to display the element on the webpage****************************************
+
+    function addOptiLanguage(langName) {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(langName));
+        document.querySelector('.language').appendChild(li)
+    }
+addOptiLanguage("Java")
+
+//********************************************Edit value*************************
+const secondLang=document.querySelector("li:nth-child(2)")
+//secondLang.innerHTML='C++'//Value edit but  not optimize way.
+const newli=document.createElement('li');
+newli.textContent='Updated python'
+secondLang.replaceWith(newli)
+
+// edit 
+
+
+// const firstLang=document.querySelector("li:nth-child(1)");
+const firstLang=document.querySelector("li:first-child");
+firstLang.outerHTML="<li> Uptated Type Script </li>"
+
+// remove element
+const lastLang=document.querySelector('li:last-child');
+lastLang.remove();// remove java 
+</script>
+</html>

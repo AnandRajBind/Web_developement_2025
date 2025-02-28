@@ -1,0 +1,38 @@
+* {
+  margin: 0%;
+  padding: 0%;
+}
+
+html,body {
+  height: 100%;
+  width: 100%;
+}
+body {
+    background-color: red;
+}
+@media only screen and(max-width:455px) {
+    body {
+         background-color: blue;
+    }
+    .boxes{
+        flex-direction: column;
+    }
+ }
+
+
+ @media screen and(orientation:portrait) {
+    body{
+        border: 2px solid black;
+    }
+ }
+.boxes{
+display: flex;
+
+}
+.box{
+    height: 344px;
+    width: 344px;
+    background-color: slateblue;
+    padding: 3px;
+    margin: 3px;
+}
