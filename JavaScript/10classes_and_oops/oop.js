@@ -31,7 +31,7 @@ const user = {
 // jaha bhi ham new keyword ka use karte hai waha ake empty object create hota hai jise instance bola jata hai.
 // constructor function call hota hai new keyword ka karan.
 // 
-/******************************************************************************************************* */
+/***********************************this and new keyword **************************************************** */
 function user(username, loginCount, isLoggedIn) {
   this.username = username;
   this.loginCount = loginCount;
