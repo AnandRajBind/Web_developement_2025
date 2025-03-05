@@ -1,13 +1,14 @@
-// note:- component extension is always .jsx in vite.while in react .jsx or .js do not matter.
+// note:- component extension is always .jsx in vite. while in react .jsx or .js does not matter.
 
 import Chai from "./chai"
 
 function App() {
- 
-  //in jsx at a time only one element is export/return. if we can return  multiple element then wrapped the  all element in a single element like (<div> multiple element pass using div <div/> ,<>multiple element pass using fragment   </> )
+ const username="Anand Raj Bind"
+  //in jsx at a time only one element can be exported/returned. if we want to return  multiple element then wrap  all elements in a single element like (<div> multiple element pass using div <div/> ,<>multiple element pass using fragment   </> )
   return (
 <>
-<h1>Chai aur React </h1>
+// here {username} is evaluated expression.username is treated as a variable. 
+<h1>Chai aur React with {username} </h1>
 <Chai/>
 <p>test para</p>
 </>
