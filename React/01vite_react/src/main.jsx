@@ -34,6 +34,9 @@ const ReactElement=React.createElement(
   'click me to visit google',
   anotherUser
 )
+//VirtualDom:-  createRoot method behind the schene create a dom like structure. because its compare the main dom and own dom,phir usi chij ko update karta hai jo actually me UI me update huwa.  but browser pure dom ko remove karta hai aur repaint karta hai tabhi hame reload ka icon show hota hai.  
+// Fiber:-React fiber algorithm is used to update the Virtual DOM.The goal of  react fiber is to increase its suitability for areas like animation,layout and gestures.Key Features:- ability to pause,abort or reuse as a new update.
+//reconcilition:-The alogorithm react uses to different one tree with another to determine which parts need to be changed.in other words we can say that virtual DOM.
 createRoot(document.getElementById('root')).render(
     //  MyApp()
     // <MyApp />
