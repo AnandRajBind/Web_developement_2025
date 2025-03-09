@@ -3,6 +3,14 @@ import { createRoot } from 'react-dom/client'
  import App from './App.jsx'
  import React from 'react'
 
+// ***************************************************Dependency*********************************
+//Dependency:- ****A dependency is some third-party code that your application depends on. Just like a child depends on its parent, your application depends on other people's code. A piece of code becomes a true dependency when your own application cannot function without it.
+//Example:-   if you want to add routing(moving from one page to another which changes your URL) in your react project then you need to install react-router-dom dependency by doing.
+// npm install react-router-dom
+//*************************************API(Application Programming Interface)************************************************ */
+// API stands for Application Programming Interface. It is a set of rules and protocols that allows different software applications to communicate with each other.
+
+//API:-  APIs function as intermediaries between a client and a server. The client sends a request to the server through the API, and the server processes this request and sends back a response. 
  function MyApp(){
   return(
     <>
