@@ -4,12 +4,9 @@ import "./index.css";
 function App() {
   const [length, setLength] = useState(8);
   const [numberAllowed, setNumberAllowed] = useState(false);
-
   const [charAllowed, setCharAllowed] = useState(false);
   const [password, setPassword] = useState("");
   //in the  useCallback() hook  two parameter are  passed first is callback function another is dependency in array formate. useCallback() hook are used to optimization.
-  // ***********************useref hook**************************
-  const passwordRef = useRef(null);
 
   const passwordGenerator = useCallback(() => {
     let pass = "";
@@ -22,6 +19,8 @@ function App() {
     }
     setPassword(pass);
   }, [length, numberAllowed, charAllowed, setPassword]);
+    // ***********************useref hook**************************
+    const passwordRef = useRef(null);
   const copyPasswordToClipboard = useCallback(() => {
     passwordRef.current?.select();
      passwordRef.current?.setSelectionRange(0,50);// copy value in the range 

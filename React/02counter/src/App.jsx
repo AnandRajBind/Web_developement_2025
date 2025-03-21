@@ -44,6 +44,7 @@ function App() {
 }
 export default App;
 
+
 /*********************** UseState hooks example ****************************** */
 // *********************************Hooks allow us to "hook" into React features such as state and lifecycle methods. You must import Hooks from react. Here we are using the useStateHook to keep track of the application state. State generally refers to application data or properties that need to be tracked.In other words we can say that hooks are built in function thats provide a extra functionality/
 
