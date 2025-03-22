@@ -5,7 +5,6 @@ function customRender(reactElement, container) {
   domElement.setAttribute("target", reactElement.props.target);
   container.appendChild(domElement);
   */
-
   // same as above code but increse the reusebility
  const domElement=document.createElement(reactElement.type);
  domElement.innerHTML=reactElement.children;
@@ -26,3 +25,5 @@ const reactElement = {
 };
 const mainContainer = document.querySelector("#root");
 customRender(reactElement, mainContainer);
+
+
