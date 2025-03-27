@@ -6,11 +6,12 @@
 "use client"
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { SignInButton,UserButton,SignedIn, SignedOut } from '@clerk/nextjs';
 
 export const Navigation =()=>{
     const pathname = usePathname();
     return(
-    <nav className='text-center'> 
+    <nav className='flex justify-center items-center p-4'> 
         <Link href="/" className={pathname === "/"? 'font-bold mr-4': 'text-blue-800 mr-4'}>
         Home
         </Link>
@@ -20,6 +21,12 @@ export const Navigation =()=>{
         <Link href="/Product/1" className={pathname === "/Product/1"? 'font-bold mr-4': 'text-blue-800 mr-4'}>
         Product 1
         </Link>
+        <SignedOut>
+        <SignInButton mode='modal'/>
+        </SignedOut>
+        <SignedIn>
+        <UserButton/>
+        </SignedIn>   
         </nav>
     )
 }
