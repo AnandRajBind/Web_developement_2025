@@ -24,9 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <Navbar />
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className="dark ">
+      <body className={`${geistSans.variable} ${geistMono.variable} `}>
+        <div className=" relative w-full flex items-center justify-center ">
+        <Navbar />
+
+        </div>
         {children}
       </body>
     </html>
