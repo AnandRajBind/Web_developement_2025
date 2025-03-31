@@ -64,7 +64,7 @@ function calculateCartPrice( val1, val2, ...num1){// rest operator  inside the f
 console.log(calculateCartPrice(200,400,600,200));//output:-  [ 600, 200 ] yaha num1 ke ander ki value ko hi return kiya gaya hai. val1 and val2 ko nhi.
 
 */
- /* ************************************************************************************************************** */
+/* ************************************************************************************************************** */
 // object pass as a parameter
 /*
 const user ={
@@ -88,13 +88,12 @@ handleObject({// directly object banaker pass ker diya gaya hai.
 
 
 //  array pass as a parameter
-const myNewArray= [200,400,100,600]
+const myNewArray = [200, 400, 100, 600]
 
-  function returnSecondValue(getArray){
- return getArray;
-  }
-  //console.log(returnSecondValue(myNewArray));
-  console.log(returnSecondValue([10,20,30]));
+function returnSecondValue(getArray) {
+  return getArray;
+}
+//console.log(returnSecondValue(myNewArray));
+console.log(returnSecondValue([10, 20, 30]));
 
 
-  
