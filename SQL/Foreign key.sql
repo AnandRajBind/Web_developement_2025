@@ -33,8 +33,8 @@ use startersql;
 -- (19, '33 Residency Road', 'Bengaluru', 'Karnataka', '560025'),
 -- (20, '22 Hazratganj', 'Lucknow', 'Uttar Pradesh', '226001');
 
- -- delete from addresses where id=1;
- delete from users where id=24;
+ delete from addresses where id=6;
+ -- delete from users where id=5;
 
 select * from users;
 select * from addresses;
