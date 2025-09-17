@@ -11,21 +11,21 @@ const ComponentA = () => {
             <h1>This is Component by using arrow function. and used to default export.  </h1>
         </div>
     )
-}
-// named export by arrow function
- export const ComponentB=()=>{
+} 
+// named export by arrow function. and props pass by destruting method. in the child component props is immutable we can use only that can not be any modification.
+ export const ComponentB=({username})=>{
     return (
         <div>
-            <h1>This is Component by using function keyword </h1>
+            <h1>This is Component by using function keyword. and  props is {username}</h1>
         </div>
     );
 }
 
-// named export by function keyword
- export function ComponentC(){
+// named export by function keyword. and props pass by destruting method.
+ export function ComponentC({roll, age}){
     return (
         <div>
-            <h1>This is Component by using function keyword </h1>
+            <h1>This is Component by using function keyword roll={roll} and age={age}</h1>
         </div>
     );
 }
