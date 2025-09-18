@@ -1,18 +1,26 @@
 
 // recieve component (buttonComponent) as a props
+
+import Button from "./Function_props";
+
 // function Model({buttonComponent}) {
-function Model({children}) {
+function Model(props) {
     return (
 
         <div>
 
             
-    <h1>This is Model Component</h1>
+    <h1>This is Model Component {props.data}</h1>
 {/* render buttonComponent  */}
     {/* {buttonComponent } */}
-    {children}
+
+
+
+    {props.children}
+
+<Button data={props.data} text={"Submit"}/>
         </div>
     )
 }
 
-export default Model;
+export default Model; 

@@ -16,6 +16,8 @@ function App() {
   }
     */
 
+  let a="codingHunger";  
+
   return (
     <>
 
@@ -29,7 +31,7 @@ function App() {
 
       {/* passing component as a props */}
 
-<Home />
+<Home data={a}/>
 
 
     </>
