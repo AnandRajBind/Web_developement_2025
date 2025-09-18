@@ -1,10 +1,16 @@
 import Model from './Model.jsx'
 import Button from './Function_props.jsx';
+import React from 'react';
 // component as a props. Home component is parent component and Model is child component.and Model component is passed as a props in Home component.
-function Home({data}) {
+function Home({data=0,name="Anand"}) {
+    // integer and undefind ko add karne par NaN aata hai.
+     let a=20+data;
     return (
-        <div>
-            <p>This is from Home Page </p>
+
+        // fragment syntax 
+
+<div> 
+         
             {/* Button comonent pass as a propes in Model Component */}
 
             {/* Method 1 */}
@@ -17,10 +23,21 @@ function Home({data}) {
                 <Button text={"Submit"} />
             </Model> */}
             {/*Props drilling  */}
-            <Model data={data} >
+            {/* <Model data={data} >
                 <div>Hi this is inside Model</div>
-            </Model>
-        </div>
+            </Model> */}
+
+                <div>Hi this is inside Model with value={a} and name={name}</div>
+         </div> 
     )
 }
+// old way of setting default props. 
+
+/*Home.defaultProps={
+    data:0,
+    name:"Anand"
+}
+*/
+
+
 export default Home;

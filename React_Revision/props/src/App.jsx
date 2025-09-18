@@ -1,6 +1,7 @@
 import Button from './Function_props'
 import './App.css'
 import Home from './home'
+import React from 'react';
 
 
 function App() {
@@ -14,12 +15,14 @@ function App() {
     //  return (alert("You are logged in")) 
     alert(`You are logged in ${name}`)
   }
-    */
+  */
 
-  let a="codingHunger";  
+  let a=20;  
 
   return (
-    <>
+
+    // React.Fragment syntax
+     <React.Fragment >
 
       {/* passing data as a props  */}
       {/* <Button name={"Anand"} roll={"Software Engineer"} age={22}/>
@@ -31,10 +34,11 @@ function App() {
 
       {/* passing component as a props */}
 
-<Home data={a}/>
+<Home data={a} name={"codingHunger"}/>
+{/* default props */}
+<Home />
 
-
-    </>
+  </React.Fragment >
   )
 }
 
