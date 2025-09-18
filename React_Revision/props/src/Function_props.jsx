@@ -14,8 +14,9 @@ function Button({ text, handleLogin }) {
 
 // child component function
     function submit() {
-        // calling parent component  function in children component with argument
-        handleLogin("argument");
+        // calling parent component  function in children component with argument.
+        // data send children component to parent component
+        handleLogin("Anand");
     }
     return (
         <button onClick={submit}>{text}</button>
