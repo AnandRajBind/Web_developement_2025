@@ -1,10 +1,9 @@
 import './App.css'
 import React, { useState } from 'react'
+import { Home } from './Home';
 
 
 function App() {
-
-
   // internal css
   const heading = {
     color: "red",
@@ -12,7 +11,6 @@ function App() {
     padding: "10px",
     borderRadius: "10px",
   }
-
   const [data, setdata] = useState(0);
   const [name, setname] = useState("codingHunger");
 
@@ -44,12 +42,13 @@ function App() {
         <div >
           {/* use internal css */}
           <h1 style={heading}> Counter   App  {data} </h1>
+          {/* External CSS */}
           <div class="codingHunger">{name}</div>
           {/* inline css used */}
           <button style={{ backgroundColor: "aqua", margin: 5 }} onClick={handleAddition}>Addition + </button>
           <button style={{ backgroundColor: "aqua", margin: 5 }} onClick={handleSubstraction}>Substraction -
-
           </button>
+          <Home />
         </div>
       </div>
     </>
