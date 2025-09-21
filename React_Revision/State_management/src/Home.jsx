@@ -1,5 +1,5 @@
 import React from 'react'
-
+import style from './Home.module.css'
 export const Home = () => {
   return (
 
@@ -8,6 +8,9 @@ export const Home = () => {
     //  isse bachane ke liye module css use kerte hai.
     //  module css me file name .module.css rakhte hai. or import krte hai.
     //  module css me class name same rakh sakte hai. dono component me same class name use ker sakte hai.
-    <div   class="codingHunger">Home</div>
+    // <div  class="codingHunger">Home</div>
+
+    // module css use kerte hai.
+    <div class={style.header} >Home</div>
   )
 }
