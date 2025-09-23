@@ -1,33 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  // arrow function 
+  const handleClick = () => {
+    alert("Button Clicked")
+  }
+
+  // ananymous function 
+  //  const handleOnchange=function(e){
+  // console.log(e)
+  //  }
+
+  const handleSubmit = (e, val) => {
+    e.preventDefault()
+    console.log(val);
+     
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* onclick event */}
+      <h1 onClick={handleClick}>Hello Developer</h1>
+
+      {/* onchange */}
+      {/* <input type="text" onChange={handleOnchange} name='input field' value={"Anand"}  placeholder='Enter Your Name'/> */}
+
+
+{/* pass the argumet on the submit form. by using arrow function*/}
+      {/* <form onSubmit={(e)=>handleSubmit(e,"hii")}>  */}
+      <form onSubmit={handleSubmit()}>
+        <input type="text" placeholder='Enter your name' />
+        <button type='submit'>Submit</button>
+      </form>
     </>
   )
 }
