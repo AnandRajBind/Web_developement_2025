@@ -2,9 +2,12 @@ import './App.css'
 import React, { useState } from 'react'
 import { Home } from './Home';
 import styleCSS from './App.module.css'
-import thumb from './assets/thumb.svg' 
+import thumb from './assets/thumb.svg'
 
 function App() {
+
+
+
   // internal css
   const heading = {
     color: "red",
@@ -37,8 +40,8 @@ function App() {
 
   return (
     <>
-    {/* Module CSS */}
-    <h1 class={styleCSS.header}>It is Counter App</h1>
+      {/* Module CSS */}
+      <h1 class={styleCSS.header}>It is Counter App</h1>
       <div>
         {/* <div onClick={ handleClick }> */}
         {/* <h1>{data}</h1> */}
@@ -52,13 +55,15 @@ function App() {
           <button style={{ backgroundColor: "aqua", margin: 5 }} onClick={handleSubstraction}>Substraction -
           </button>
           <Home />
-<img src={thumb} alt="" />
+          <img src={thumb} alt="" />
 
         </div>
       </div>
+
+
+     
     </>
   )
-
 }
-
 export default App;
+
