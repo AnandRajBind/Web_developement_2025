@@ -15,10 +15,16 @@ useEffect(()=>{
   
 //****************** */ Empty  Dependency Array(Run only onceAfter the Initial Render. Chahe component Rerender ho or na ho kwl 1 hi bar render hoga), just like ComponentDidMount)**********************
 
-useEffect(()=>{
+/*useEffect(()=>{
   setCount(prev=>prev+1); // Run only onceAfter the Initial Render.  
   console.log(count);
 },[])
+*/
+//****************** */ With Dependency Array(Run on specific state/props change - like componentDidUpdte, ex:- runns every time count changes ), just like ComponentDidMount)********************** 
+useEffect(()=>{
+console.log(`API calling is happining for ${count}`);
+},[count])
+
 
 
 // const increaseFunction=()=>{
@@ -28,7 +34,7 @@ useEffect(()=>{
 return (
     <>
     {/* <h1 onClick={increaseFunction}>click Me</h1> */}
-    <h1 >click Me</h1>
+    <h1 onClick={()=>setCount(prev=>prev+1)}>click Me</h1>
      </>
   )
 }
