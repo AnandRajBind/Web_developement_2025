@@ -2,6 +2,6 @@ import React from 'react'
 
 export const Home = () => {
   return (
-    <div>Home</div>
+    <div style={{backgroundColor:'purple', padding:20, fontSize:20}}>Home</div>
   )
 }
