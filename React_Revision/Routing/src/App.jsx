@@ -4,6 +4,7 @@ import { Navbar } from './component/Navbar'
 import { NotFound } from './component/NotFound'
 import { Profile } from './component/Profile'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { ProfileDetails } from './component/ProfileDetails'
 function App() {
 
   return (
@@ -13,13 +14,17 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='profile' element={<Profile />} />
-          {/* It is must be last Routs  */}
-          <Route path='*' element={<NotFound />} /> 
-        
+          {/* Dynamic Routing */}
+          <Route path='profile/:username' element={<ProfileDetails />} />
+
+          {/* It is must be last Routs. if above routes are not match then show the NotFound Error  */}
+          <Route path='*' element={<NotFound />} />
+
+
         </Routes>
       </>
     </Router>
   )
 }
+export default App;
 
-export default App
