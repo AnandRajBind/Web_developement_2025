@@ -15,7 +15,6 @@ export const ProfileDetails = () => {
 const handleChange=()=>{
 navigate('/')
 }
-
     return (
 
         <div style={{ backgroundColor: 'skyblue', padding: 20 }}>
