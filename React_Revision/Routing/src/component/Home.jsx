@@ -1,7 +1,7 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom';
-
+import { UserContext } from './userContext';
 
 // QueryParameters
 export const Home = () => {
@@ -18,15 +18,20 @@ export const Home = () => {
     setSearchText("")
   }
 
+  const { user, updateNameGlobally } = useContext(UserContext);
+
+
   return (
-       <form onSubmit={handleSubmit}>
 
-        <input type="text" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
-        <button >Submit</button>
-        {/* show query parameter in home page  */}
-        {searchQueryValue}
-      </form>
 
-     // <div style={{backgroundColor:'purple', padding:20, fontSize:20}}>Home</div>
+    <form onSubmit={handleSubmit}>
+      <div style={{ margin: 20 }}>{user} Fetch data Api</div>
+      <input type="text" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+      <button >Submit</button>
+      {/* show query parameter in home page  */}
+      {searchQueryValue}
+    </form>
+
+    // <div style={{backgroundColor:'purple', padding:20, fontSize:20}}>Home</div>
   )
 }

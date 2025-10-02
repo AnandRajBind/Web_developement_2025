@@ -38,7 +38,6 @@ function App() {
             <Route path='profile' element={<Profile />} />
             {/* Dynamic Routing */}
             <Route path='profile/:username' element={<ProfileDetails />} />
-
             {/* It is must be last Routs. if above routes are not match then show the NotFound Error  */}
             <Route path='*' element={<NotFound />} />
           </Routes>
