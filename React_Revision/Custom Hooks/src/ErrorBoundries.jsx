@@ -22,7 +22,7 @@ componentDidCatch(error,errorInfo){
             if(this.props.fallBack){
                 return this.props.fallBack()
             }
-            return <div>This Component has crashed</div>
+            return <div >This Component has crashed</div>
         }
         return this.props.children
     }
