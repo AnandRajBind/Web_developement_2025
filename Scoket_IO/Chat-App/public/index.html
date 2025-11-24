@@ -9,39 +9,34 @@
 
 <body>
     <h1>Chatting</h1>
-
-    <input id="message" type="text" placeholder="Enter Message" >
+    <input id="message" type="text" placeholder="Enter Message">
     <button id="sendBtn">Send</button>
-<div id="messages"></div>
-
+    <div id="messages"></div>
     <!-- <button onclick="createConnection()"> Create WS Connection</button> -->
-
     <script src="/socket.io/socket.io.js"></script>
     <!-- <script>
         function createConnection() {
-                    const socket = io(); // Connect to the server
+        const socket = io(); // Connect to the server
         }  
     </script> -->
 
     <script>
-const socket = io(); // Connect to the server
-const sendBtn=document.getElementById('sendBtn');
-const messageInput=document.getElementById('message');
-const allMessages=document.getElementById('messages');
+        const socket = io(); // Connect to the server
+        const sendBtn = document.getElementById('sendBtn');
+        const messageInput = document.getElementById('message');
+        const allMessages = document.getElementById('messages');
 
-socket.on("message",(message)=>{
-   
-const p=document.createElement('p');
-p.innerText=message;
-allMessages.appendChild(p);
+        socket.on("message", (message) => {
 
-})
-
-sendBtn.addEventListener('click',(e)=>{
-    const message=messageInput.value;
-    console.log("Sending message:",message);
-    socket.emit('user-message',message);
-})
-    </script> 
+            const p = document.createElement('p');
+            p.innerText = message;
+            allMessages.appendChild(p);
+        })
+        sendBtn.addEventListener('click', (e) => {
+            const message = messageInput.value;
+            console.log("Sending message:", message);
+            socket.emit('user-message', message);
+        })
+    </script>
 </body>
 </html>
