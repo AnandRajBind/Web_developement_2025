@@ -1,15 +1,18 @@
 
 import React from 'react'
-import Squire from './Square/Squire'
+import Square from './Square/Square'
 import './App.css'
 import { useState } from 'react'
 
 // Dummy data for rendering squares
+
+
 const renderFrom = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-
-const [gameState, setGameState] = useState(renderFrom)
-
 function App() {
+
+  const [gameState, setGameState] = useState(renderFrom)
+  const [currentPlayer,setCurrentPlayer]=useState('circle');
+  
   return (
     <div className='main-div'>
       <div className='move-detection'>
@@ -22,10 +25,13 @@ function App() {
           {
             gameState.map((arr) =>
               arr.map((e) => {
-                return <Squire
+                return <Square
+                currentPlayer={currentPlayer}
+                setCurrentPlayer={setCurrentPlayer}
                   setGameState={setGameState}
+                  id={e} 
                   key={e}
-                  value={e} />
+                  />
               })
             )}
         </div>
