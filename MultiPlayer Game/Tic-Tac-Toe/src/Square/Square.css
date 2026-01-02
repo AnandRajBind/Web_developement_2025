@@ -9,3 +9,8 @@
     cursor: pointer;
     background-color: #574cb4;
 }
+
+.not-allowed{    
+cursor: not-allowed !important
+
+}
