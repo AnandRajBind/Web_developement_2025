@@ -10,6 +10,14 @@
 .water-background {
   background-color: #4B495F;
 }
+ 
+.finished-state {
+  margin-top: 20px;
+  font-size: 30px;
+  color: #574cb4;
+  font-weight: 600;
+  text-align: center ;
+}
 
 .game-heading {
   padding: 5px 20px;

@@ -23,6 +23,20 @@ function App() {
         return gameState[0][col];
       }
     }
+
+    if (gameState[0][0] === gameState[1][1] && gameState[1][1] === gameState[2][2]) {
+      return gameState[0][0];
+    }
+    
+    if (gameState[0][2] === gameState[1][1] && gameState[1][1] === gameState[2][0]) {
+      return gameState[0][2];
+    }
+    const isDrawMatch=gameState.flat().every((e)=>{
+      (e==='circle' || e==='cross');
+      return true;
+    });
+    console.log(isDrawMatch);
+    return null;
   }
   useEffect(() => {
     const winner = checkWinner();
@@ -30,8 +44,8 @@ function App() {
       setFinishState(winner);
       console.log(winner);
     }
-  },[gameState]);
-  
+  }, [gameState]);
+
   return (
     <div className='main-div'>
       <div className='move-detection'>
@@ -56,6 +70,11 @@ function App() {
               })
             )}
         </div>
+        {
+          finishState &&
+          (<h3 className='finished-state'>{finishState} won the game </h3>
+          )
+        }
       </div>
     </div>
   )
