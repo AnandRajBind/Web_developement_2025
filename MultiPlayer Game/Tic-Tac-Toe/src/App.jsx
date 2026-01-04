@@ -58,8 +58,6 @@ function App() {
     }
   }, [gameState]);
 
-
-
 if(!playOnline){
   return <div className='main-div'> 
     <button className='playOnline'> Play Online </button>
