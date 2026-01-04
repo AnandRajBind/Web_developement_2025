@@ -12,6 +12,7 @@ function App() {
   const [currentPlayer, setCurrentPlayer] = useState("circle");
   const [finishState, setFinishState] = useState(false);
   const [finishedArrayState, setFinishedArrayState] = useState([]);
+  const [playOnline, setPlayonline] = useState(false);
   const checkWinner = () => {
     // row dynamic check
     for (let row = 0; row < gameState.length; row++) {
@@ -57,6 +58,13 @@ function App() {
     }
   }, [gameState]);
 
+
+
+if(!playOnline){
+  return <div className='main-div'> 
+    <button className='playOnline'> Play Online </button>
+  </div>
+}
   return (
     <div className='main-div'>
       <div className='move-detection'>
