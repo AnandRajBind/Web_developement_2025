@@ -3,6 +3,10 @@ import React from 'react'
 import Square from './Square/Square'
 import './App.css'
 import { useState, useEffect } from 'react'
+import { io } from 'socket.io-client';
+import Swal from 'sweetalert2';
+
+
 
 // Dummy data for rendering squares
 const renderFrom = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
@@ -12,7 +16,10 @@ function App() {
   const [currentPlayer, setCurrentPlayer] = useState("circle");
   const [finishState, setFinishState] = useState(false);
   const [finishedArrayState, setFinishedArrayState] = useState([]);
-  const [playOnline, setPlayonline] = useState(false);
+  const [playOnline, setPlayOnline] = useState(false);
+  const [socket, setSocket] = useState(null);
+  const [playerName, setPlayerName] = useState("");
+
   const checkWinner = () => {
     // row dynamic check
     for (let row = 0; row < gameState.length; row++) {
@@ -21,7 +28,6 @@ function App() {
         setFinishedArrayState([row * 3 + 0, row * 3 + 1, row * 3 + 2]);
         return gameState[row][0];
       }
-
     }
     // column dynamic check
     for (let col = 0; col < gameState.length; col++) {
@@ -32,14 +38,14 @@ function App() {
         return gameState[0][col];
       }
     }
-    // Dialonal check
+    // Diagonal check
     if (gameState[0][0] === gameState[1][1] && gameState[1][1] === gameState[2][2]) {
-        setFinishedArrayState([0 * 3 + 0, 1 * 3 + 1, 2 * 3 + 2]);
+      setFinishedArrayState([0 * 3 + 0, 1 * 3 + 1, 2 * 3 + 2]);
 
       return gameState[0][0];
     }
     if (gameState[0][2] === gameState[1][1] && gameState[1][1] === gameState[2][0]) {
-        setFinishedArrayState([0 * 3 + 2, 1 * 3 + 1, 2 * 3 + 0]);
+      setFinishedArrayState([0 * 3 + 2, 1 * 3 + 1, 2 * 3 + 0]);
 
       return gameState[0][2];
     }
@@ -57,12 +63,53 @@ function App() {
       setFinishState(winner);
     }
   }, [gameState]);
+  //   Take player name using sweet alert
 
-if(!playOnline){
-  return <div className='main-div'> 
-    <button className='playOnline'> Play Online </button>
-  </div>
-}
+  const takePlayerName = async () => {
+    const result = await Swal.fire({
+      title: "Enter your Name",
+      input: "text",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return "You need to write something!";
+        }
+      }
+    });
+
+    return result;
+  }
+
+  //  Socket connection with server
+  socket?.on("connect", function () {
+    setPlayOnline(true);
+  })
+
+  //  play button click handler
+  async function playOnlineClick() {
+    const result = await takePlayerName();
+    // yadi user ne apna name enter nahi kiya to return kar do
+    if (!result.isConfirmed) return;
+
+    const username = result.value;
+    setPlayOnline(username);
+
+    console.log(result);
+    //  Socket.io client import and connection
+    const newSocket = io('http://localhost:3000', {
+      autoConnect: true
+    });
+    setSocket(newSocket);
+  }
+
+
+  //  play button rendering
+  if (!playOnline) {
+    return <div className='main-div'>
+      <button onClick={playOnlineClick} className='playOnline'> Play Online </button>
+    </div>
+  }
+
   return (
     <div className='main-div'>
       <div className='move-detection'>
@@ -98,7 +145,6 @@ if(!playOnline){
           (<h3 className='finished-state'> It's a draw </h3>
           )
         }
-
       </div>
     </div>
   )
