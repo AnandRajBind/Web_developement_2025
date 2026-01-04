@@ -11,6 +11,13 @@
 }
 
 .not-allowed{    
-cursor: not-allowed !important
+cursor: not-allowed !important;
+pointer-events: none;
+}
 
+.circle-won{
+    background-color: #DD7F9F !important;
+}
+.cross-won{
+    background-color: rgb(63,167,240) !important;
 }
