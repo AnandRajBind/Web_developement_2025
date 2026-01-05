@@ -19,6 +19,7 @@ function App() {
   const [playOnline, setPlayOnline] = useState(false);
   const [socket, setSocket] = useState(null);
   const [playerName, setPlayerName] = useState("");
+  const [opponentName, setOpponentName] = useState(null);
 
   const checkWinner = () => {
     // row dynamic check
@@ -76,7 +77,6 @@ function App() {
         }
       }
     });
-
     return result;
   }
 
@@ -94,10 +94,14 @@ function App() {
     const username = result.value;
     setPlayOnline(username);
 
-    console.log(result);
+    // console.log(result);
     //  Socket.io client import and connection
     const newSocket = io('http://localhost:3000', {
       autoConnect: true
+    });
+// emit request to play event to server with player name
+    newSocket.emit("request_to_play",{
+      playerName:username,
     });
     setSocket(newSocket);
   }

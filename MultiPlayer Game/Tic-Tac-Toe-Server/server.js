@@ -18,21 +18,25 @@ io.on('connection', (socket) => {
     console.log('New  user Joined connected:' + socket.id);
 })
 
-const allUsers = [];
+const allUsers = {};
 io.on('connection', (socket) => {
-    allUsers.push({
+    allUsers[socket.id] = {
         socket: socket,
         online: true,
+    };
+    socket.on("request_to_play", (data) => {
+        const currentUser = allUsers[socket.id]
+        currentUser.playerName = data.playerName;
+        console.log(currentUser);
     });
+
     socket.on("disconnect", function () {
-        for (let index = 0; index < allUsers.length; index++) {
-            const user = allUsers[index];
-            if (user.id === socket.id) {
-                user.online = false;
-            }
-        }
-    })
-})
+        allUsers[socket.id] = {
+            socket: { ...socket, online: false },
+            online: true,
+        };
+    });
+});
 
 // publisher -> action -> action perform karne ke liye on() method use karte hai
 // listner -> reaction -> reaction perform karne ke liye emit() method use karte hai
