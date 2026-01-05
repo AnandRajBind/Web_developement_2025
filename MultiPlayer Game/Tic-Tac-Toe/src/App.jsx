@@ -84,6 +84,15 @@ function App() {
   socket?.on("connect", function () {
     setPlayOnline(true);
   })
+  // listening opponent found or not event from server
+  socket?.on("OpponentNotFound", function () {
+    setOpponentName(false);
+  })
+  socket?.on("OpponentFound", function (data) {
+    console.log(data);
+
+    setOpponentName(data.opponentName);
+  })
 
   //  play button click handler
   async function playOnlineClick() {
@@ -92,25 +101,29 @@ function App() {
     if (!result.isConfirmed) return;
 
     const username = result.value;
-    setPlayOnline(username);
+    setPlayerName(username);
 
     // console.log(result);
     //  Socket.io client import and connection
     const newSocket = io('http://localhost:3000', {
       autoConnect: true
     });
-// emit request to play event to server with player name
-    newSocket.emit("request_to_play",{
-      playerName:username,
+    // emit request to play event to server with player name
+    newSocket.emit("request_to_play", {
+      playerName: username,
     });
     setSocket(newSocket);
   }
-
-
   //  play button rendering
   if (!playOnline) {
     return <div className='main-div'>
       <button onClick={playOnlineClick} className='playOnline'> Play Online </button>
+    </div>
+  }
+
+  if (playOnline && !opponentName) {
+    return <div className="waiting">
+      <p>Waiting for opponent to join...</p>
     </div>
   }
 
@@ -150,6 +163,11 @@ function App() {
           )
         }
       </div>
+      {
+        !finishState && opponentName  &&
+        (<h3 className='finished-state'> You are playing against {opponentName} </h3>
+        )
+      }
     </div>
   )
 }

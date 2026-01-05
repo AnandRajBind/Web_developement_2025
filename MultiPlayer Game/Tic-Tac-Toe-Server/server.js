@@ -17,28 +17,54 @@ const io = new Server(httpServer, {
 io.on('connection', (socket) => {
     console.log('New  user Joined connected:' + socket.id);
 })
-
+// maintaining all users data
 const allUsers = {};
 io.on('connection', (socket) => {
     allUsers[socket.id] = {
         socket: socket,
         online: true,
     };
+    // when user request to play
     socket.on("request_to_play", (data) => {
         const currentUser = allUsers[socket.id]
         currentUser.playerName = data.playerName;
-        console.log(currentUser);
+        // find opponent player
+        let opponentPlayer;
+
+        for (const key in allUsers) {
+            const user = allUsers[key];
+            if (user.online && !user.playing && socket.id !== key) {
+                opponentPlayer = user;
+                break;
+            }
+        }
+        console.log(opponentPlayer);
+        // log opponent found or not
+        if (opponentPlayer) {
+            opponentPlayer.socket.emit('OpponentFound', {
+                opponentName: currentUser.playerName,
+            });
+            currentUser.socket.emit('OpponentFound', {
+                opponentName: opponentPlayer.playerName,
+            });
+        }
+        else {
+            currentUser.socket.emit("Opponent not found");
+        }
     });
 
+    // when user disconnect from server
     socket.on("disconnect", function () {
-        allUsers[socket.id] = {
-            socket: { ...socket, online: false },
-            online: true,
-        };
+        // allUsers[socket.id] = {
+        //     socket: { ...socket, online: false },
+        //     online: false,
+        // };
+        const currentUser = allUsers[socket.id];
+        currentUser.online = false;
     });
 });
 
 // publisher -> action -> action perform karne ke liye on() method use karte hai
 // listner -> reaction -> reaction perform karne ke liye emit() method use karte hai
 
-httpServer.listen(3000); 
+httpServer.listen(3000);
