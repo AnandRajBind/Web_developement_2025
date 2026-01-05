@@ -64,5 +64,12 @@
   left: 0;
   right: 0;
   bottom: 0;
+}
 
+.current-move-circle{
+  background-color: #DD7F9F;
+}
+
+.current-move-cross{
+  background-color: #3FA7F0;
 }

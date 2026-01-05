@@ -20,6 +20,7 @@ function App() {
   const [socket, setSocket] = useState(null);
   const [playerName, setPlayerName] = useState("");
   const [opponentName, setOpponentName] = useState(null);
+  const [playingAs, setPlayingAs] = useState(null);
 
   const checkWinner = () => {
     // row dynamic check
@@ -33,9 +34,7 @@ function App() {
     // column dynamic check
     for (let col = 0; col < gameState.length; col++) {
       if (gameState[0][col] === gameState[1][col] && gameState[1][col] === gameState[2][col]) {
-
         setFinishedArrayState([0 * 3 + col, 1 * 3 + col, 2 * 3 + col]);
-
         return gameState[0][col];
       }
     }
@@ -63,8 +62,16 @@ function App() {
     if (winner) {
       setFinishState(winner);
     }
-  }, [gameState]);
+    else {
+      if (gameState.flat().includes("circle") || gameState.flat().includes("cross")) {
+        socket.emit("playerMoveFromClient", {
+          gameState: gameState,
+        })
+      }
+    }
+    }, [gameState]);
   //   Take player name using sweet alert
+
 
   const takePlayerName = async () => {
     const result = await Swal.fire({
@@ -79,7 +86,6 @@ function App() {
     });
     return result;
   }
-
   //  Socket connection with server
   socket?.on("connect", function () {
     setPlayOnline(true);
@@ -89,11 +95,10 @@ function App() {
     setOpponentName(false);
   })
   socket?.on("OpponentFound", function (data) {
+    setPlayingAs(data.playingAs);
     console.log(data);
-
     setOpponentName(data.opponentName);
   })
-
   //  play button click handler
   async function playOnlineClick() {
     const result = await takePlayerName();
@@ -120,18 +125,16 @@ function App() {
       <button onClick={playOnlineClick} className='playOnline'> Play Online </button>
     </div>
   }
-
   if (playOnline && !opponentName) {
     return <div className="waiting">
       <p>Waiting for opponent to join...</p>
     </div>
   }
-
   return (
     <div className='main-div'>
       <div className='move-detection'>
-        <div className="left">YourSelf</div>
-        <div className="right">Opponent</div>
+        <div className={`left ${currentPlayer === playingAs ? "current-move-" + currentPlayer : ""}`}>{playerName}</div>
+        <div className={`right ${currentPlayer !== playingAs ? "current-move-" + currentPlayer : ""}`}>{opponentName}</div>
       </div>
       <div >
         <h1 className='game-heading water-background'>Tic Tac Toe</h1>
@@ -164,7 +167,7 @@ function App() {
         }
       </div>
       {
-        !finishState && opponentName  &&
+        !finishState && opponentName &&
         (<h3 className='finished-state'> You are playing against {opponentName} </h3>
         )
       }

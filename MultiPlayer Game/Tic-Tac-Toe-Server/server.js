@@ -20,10 +20,12 @@ io.on('connection', (socket) => {
 // maintaining all users data
 const allUsers = {};
 io.on('connection', (socket) => {
+
     allUsers[socket.id] = {
         socket: socket,
         online: true,
     };
+
     // when user request to play
     socket.on("request_to_play", (data) => {
         const currentUser = allUsers[socket.id]
@@ -41,11 +43,24 @@ io.on('connection', (socket) => {
         console.log(opponentPlayer);
         // log opponent found or not
         if (opponentPlayer) {
-            opponentPlayer.socket.emit('OpponentFound', {
-                opponentName: currentUser.playerName,
-            });
             currentUser.socket.emit('OpponentFound', {
                 opponentName: opponentPlayer.playerName,
+                playingAs: "circle"
+            });
+            opponentPlayer.socket.emit('OpponentFound', {
+                opponentName: currentUser.playerName,
+                playingAs: "cross"
+            });
+
+            currentUser.socket.on("playerMoveFromClient", (data) => {
+                opponentPlayer.socket.emit("playerMoveFromServer", {
+                    gameState: data.gameState,
+                });
+            });
+            opponentPlayer.socket.on("playerMoveFromClient", (data) => {
+                currentUser.socket.emit("playerMoveFromServer", {
+                    gameState: data.gameState,
+                });
             });
         }
         else {
