@@ -102,4 +102,8 @@ io.on('connection', (socket) => {
 // publisher -> action -> action perform karne ke liye on() method use karte hai
 // listner -> reaction -> reaction perform karne ke liye emit() method use karte hai
 
-httpServer.listen(3000);
+const PORT = process.env.PORT || 3000;
+
+httpServer.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
