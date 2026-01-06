@@ -62,15 +62,8 @@ function App() {
     if (winner) {
       setFinishState(winner);
     }
-    else {
-      if (gameState.flat().includes("circle") || gameState.flat().includes("cross")) {
-        socket.emit("playerMoveFromClient", {
-          gameState: gameState,
-        })
-      }
-    }
   }, [gameState]);
-  
+
   //   Take player name using sweet alert
   const takePlayerName = async () => {
     const result = await Swal.fire({
@@ -85,10 +78,26 @@ function App() {
     });
     return result;
   }
+
+  socket?.on("opponentLeftMatch",()=>{
+    alert("Opponent has left the match");
+    setFinishState("opponentLeftMatch");
+  })
+
   socket?.on("playerMoveFromServer", (data) => {
-    console.log("Got data from player move to Server");
-    setGameState(data.gameState);
+    const id = data.state.id;
+    setGameState((prevState) => {
+      let newState = [...prevState];
+      const rowIndex = Math.floor(id / 3);
+      const colIndex = id % 3;
+      console.log(rowIndex, colIndex);
+      newState[rowIndex][colIndex] = data.state.sign;
+      return newState;
+    });
+    setCurrentPlayer(data.state.sign === 'circle' ? 'cross' : 'circle');
   });
+
+
   //  Socket connection with server
   socket?.on("connect", function () {
     setPlayOnline(true);
@@ -145,7 +154,11 @@ function App() {
           {
             gameState.map((arr, rowIndex) =>
               arr.map((e, colIndex) => {
-                return <Square
+                return (
+                <Square
+                socket={socket}
+                playingAs={playingAs}
+                  gameState={gameState}
                   finishedArrayState={finishedArrayState}
                   finishState={finishState}
                   // setFinishState={setFinishState}
@@ -154,17 +167,19 @@ function App() {
                   setGameState={setGameState}
                   id={rowIndex * 3 + colIndex}
                   key={rowIndex * 3 + colIndex}
+                  currentElement={e}
                 />
+              );
               })
             )}
         </div>
         {
-          finishState && finishState !== "draw" &&
-          (<h3 className='finished-state'>{finishState} won the game </h3>
+          finishState && finishState !== "opponentLeftMatch" && finishState  !== "draw" &&
+          (<h3 className='finished-state'>{finishState === playingAs ? "You" : finishState} won the game </h3>
           )
         }
         {
-          finishState && finishState === "draw" &&
+          finishState   && finishState !== "opponentLeftMatch" && finishState === "draw" &&
           (<h3 className='finished-state'> It's a draw </h3>
           )
         }
@@ -172,6 +187,11 @@ function App() {
       {
         !finishState && opponentName &&
         (<h3 className='finished-state'> You are playing against {opponentName} </h3>
+        )
+      }
+      {
+        finishState && finishState === "opponentLeftMatch" &&  
+        (<h3 >  You won the match, because your opponent left the game. </h3>
         )
       }
     </div>

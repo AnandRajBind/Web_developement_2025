@@ -43,11 +43,27 @@ const crossSvg = (
     </g>
   </svg>
 );
-const Square = ({ setGameState, finishedArrayState, finishState, id, currentPlayer, setCurrentPlayer }) => {
+const Square = ({
+  setGameState,
+  socket,
+  currentElement,
+  playingAs,
+  gameState,
+  finishedArrayState,
+  finishState,
+  id,
+  currentPlayer,
+  setCurrentPlayer
+}) => {
   const [icon, setIcon] = useState(null);
 
   const clickOnSquare = () => {
-    if( finishState ) return;
+
+    if (playingAs !== currentPlayer) {
+      return;
+    }
+
+    if (finishState) return;
     if (!icon) {
       if (currentPlayer === "circle") {
         setIcon(circleSvg);
@@ -56,10 +72,18 @@ const Square = ({ setGameState, finishedArrayState, finishState, id, currentPlay
         setIcon(crossSvg);
       }
       const myCurrentPlayer = currentPlayer;
+
+      socket.emit("playerMoveFromClient", {
+        state: {
+          id,
+          sign: myCurrentPlayer,
+        }
+      });
+
       setCurrentPlayer(currentPlayer === 'circle' ? 'cross' : 'circle');
+
       setGameState(prevState => {
         let newState = [...prevState];
-        console.log(newState);
         const rowIndex = Math.floor(id / 3);
         const colIndex = id % 3;
         console.log(rowIndex, colIndex);
@@ -69,7 +93,17 @@ const Square = ({ setGameState, finishedArrayState, finishState, id, currentPlay
     }
   };
   return (
-    <div onClick={clickOnSquare} className={`square ${finishState?'not-allowed' : ''} ${finishedArrayState.includes(id)? finishState + '-won':"" }`}>{icon}</div>
+    <div onClick={clickOnSquare}
+      className={`square ${finishState ? 'not-allowed' : ''}
+       ${currentPlayer !== playingAs ? 'not-allowed' : ""}
+       
+      ${finishedArrayState.includes(id) ? finishState + '-won' : ""
+        }
+        ${
+       finishState && finishState !== playingAs ? "grey-background" : ""}
+        `}>
+      {currentElement === 'circle' ? circleSvg : currentElement === "cross" ? crossSvg : icon}
+    </div>
   )
 };
 

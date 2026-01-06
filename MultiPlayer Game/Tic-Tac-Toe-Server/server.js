@@ -19,6 +19,7 @@ io.on('connection', (socket) => {
 })
 // maintaining all users data
 const allUsers = {};
+const allRooms = [];
 io.on('connection', (socket) => {
 
     allUsers[socket.id] = {
@@ -43,6 +44,11 @@ io.on('connection', (socket) => {
         console.log(opponentPlayer);
         // log opponent found or not
         if (opponentPlayer) {
+            allRooms.push({
+                player1: opponentPlayer,
+                player2: currentUser
+            });
+
             currentUser.socket.emit('OpponentFound', {
                 opponentName: opponentPlayer.playerName,
                 playingAs: "circle"
@@ -54,12 +60,12 @@ io.on('connection', (socket) => {
 
             currentUser.socket.on("playerMoveFromClient", (data) => {
                 opponentPlayer.socket.emit("playerMoveFromServer", {
-                    gameState: data.gameState,
+                    ...data
                 });
             });
             opponentPlayer.socket.on("playerMoveFromClient", (data) => {
                 currentUser.socket.emit("playerMoveFromServer", {
-                    gameState: data.gameState,
+                    ...data
                 });
             });
         }
@@ -70,12 +76,26 @@ io.on('connection', (socket) => {
 
     // when user disconnect from server
     socket.on("disconnect", function () {
-        // allUsers[socket.id] = {
-        //     socket: { ...socket, online: false },
-        //     online: false,
-        // };
+
         const currentUser = allUsers[socket.id];
         currentUser.online = false;
+        currentUser.playing = false;
+
+        // notify opponent that current user has left the match
+
+        for (let i = 0; i < allRooms.length; i++) {
+            const { player1, player2 } = allRooms[i];
+
+            if (player1.socket.id === socket.id) {
+                player2.socket.emit("opponentLeftMatch");
+                break;
+            }
+            if (player2.socket.id === socket.id) {
+                player1.socket.emit("opponentLeftMatch");
+                break;
+            }
+
+        }
     });
 });
 
