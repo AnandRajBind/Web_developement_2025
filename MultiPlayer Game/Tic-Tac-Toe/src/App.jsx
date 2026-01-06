@@ -69,10 +69,9 @@ function App() {
         })
       }
     }
-    }, [gameState]);
+  }, [gameState]);
+  
   //   Take player name using sweet alert
-
-
   const takePlayerName = async () => {
     const result = await Swal.fire({
       title: "Enter your Name",
@@ -86,10 +85,14 @@ function App() {
     });
     return result;
   }
+  socket?.on("playerMoveFromServer", (data) => {
+    console.log("Got data from player move to Server");
+    setGameState(data.gameState);
+  });
   //  Socket connection with server
   socket?.on("connect", function () {
     setPlayOnline(true);
-  })
+  });
   // listening opponent found or not event from server
   socket?.on("OpponentNotFound", function () {
     setOpponentName(false);
